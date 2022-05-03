@@ -1,0 +1,91 @@
+# block ID's from:
+# https://www.minecraftforum.net/forums/minecraft-java-edition/discussion/114963-all-item-block-ids-in-one-place
+# (with some slight modifications)
+
+1:  name "Stone", texture.all stone
+2:  name "Grass", texture.top grass_block_top, texture.bottom dirt, texture.sides grass_block_side
+3:  name "Dirt", texture.all dirt
+4:  name "Cobblestone", texture.all cobblestone
+5:  name "Planks", texture.all oak_planks
+6:  name "Sapling", model models.plant, texture.all oak_sapling
+7:  name "Bedrock", texture.all bedrock
+8:  name "Water", model models.liquid, texture.all water_still
+9:  sameas 8, name "Stationary Water"
+10: name "Lava", model models.liquid, texture.all lava_still
+11: sameas 10, name "Stationary Lava"
+12: name "Sand", texture.all sand
+13: name "Gravel", texture.all gravel
+14: name "Gold Ore", texture.all gold_ore
+15: name "Iron Ore", texture.all iron_ore
+16: name "Coal Ore", texture.all coal_ore
+17: name "Log", texture.y oak_log_top, texture.sides oak_log
+18: name "Leaves", model models.leaves, texture.all oak_leaves
+19: name "Sponge", texture.all sponge
+20: name "Glass", model models.glass, texture.all glass
+21: name "Red Wool", texture.all red_wool
+22: name "Orange Wool", texture.all orange_wool
+23: name "Yellow Wool", texture.all yellow_wool
+24: name "Lime Wool", texture.all lime_wool
+25: name "Green Wool", texture.all green_wool
+26: name "Aqua Wool", texture.all unknown
+27: name "Cyan Wool", texture.all cyan_wool
+28: name "Blue Wool", texture.all blue_wool
+29: name "Purple Wool", texture.all purple_wool
+30: name "Indigo Wool", texture.all unknown
+31: name "Violet Wool", texture.all unknown
+32: name "Magenta Wool", texture.all magenta_wool
+33: name "Pink Wool", texture.all pink_wool
+34: name "Black Wool", texture.all black_wool
+35: name "Grey Wool", texture.all unknown
+36: name "White Wool", texture.all white_wool
+37: name "Yellow Flower", model models.plant, texture.all dandelion
+38: name "Red Rose", model models.plant, texture.all rose_bush
+39: name "Brown Mushroom", model models.plant, texture.all brown_mushroom
+40: name "Red Mushroom", model models.plant, texture.all red_mushroom
+41: name "Gold Block", texture.all gold_block
+42: name "Iron Block", texture.all iron_block
+43: name "Double Slab", texture.sides smooth_stone_slab_side, texture.y smooth_stone
+44: name "Slab", model models.slab, texture.sides smooth_stone_slab_side, texture.y smooth_stone
+45: name "Bricks", texture.all bricks
+46: name "TNT", texture.all tnt
+47: name "Bookshelf", texture.y oak_planks, texture.sides bookshelf
+48: name "Mossy Cobblestone", texture.all mossy_cobblestone
+49: name "Obsidian", texture.all obsidian
+50: name "Torch", model models.torch, texture.top fire_0, texture.bottom torch, texture.sides torch
+51: name "Fire", model models.fire, texture.all fire_0
+# I know, the model name isn't great, but it's got the same graphical properties
+52: name "Mob Spawner", model models.leaves, texture.all unknown
+53: name "Wooden Stairs", model models.stairs, texture.all oak_planks
+54: name "Chest", texture.y unknown, texture.sides unknown, texture.front unknown
+55: name "Redstone Wire", model models.flat, texture.all redstone_dust_line0
+56: name "Diamond Ore", texture.all diamond_ore
+57: name "Diamond Block", texture.all diamond_block
+58: name "Crafting Table", texture.all crafting_table
+59: name "Crops", model models.crop, texture.all wheat_stage7
+60: name "Soil", model models.soil, texture.all dirt, texture.top farmland
+61: name "Furnace", texture.top furnace2, texture.bottom furnace_side, texture.sides furnace_side
+62: name "Lit Furnace", texture.top furnace2_lit, texute.bottom furnace_side texture.sides furnace_side
+63: name "Sign Post", model models.sign_post, texture.all oak_planks
+64: name "Wooden Door", model models.door, texture.all oak_planks
+65: name "Ladder", model models.ladder, texture.all unknown
+66: name "Rails", model models.flat, texture.all rail
+67: name "Cobblestone Stairs", model models.stairs, texture.all cobblestone
+68: name "Sign", model models.sign, texture.all oak_planks
+69: name "Lever", model models.lever, texture.all lever
+70: name "Stone Pressure Plate", model models.pressure_plate, texture.all stone
+71: name "Iron Door", model models.door, texture.all iron_door_bottom
+72: name "Wooden Pressure Plate", model models.pressure_plate, texture.all oak_planks
+73: name "Redstone Ore", texture.all redstone_ore
+# when we implement a lighting system, this will have some kind of "emissive" property
+74: name "Lit Redstone Ore", texture.all redstone_ore
+75: name "Redstone Torch", model models.torch, texture.top unknown, texture.bottom unknown, texture.sides torch
+76: name "Redstone Torch (Off)", model models.torch, texture.top unknown, texture.bottom unknown, texture.sides torch
+77: name "Stone Button", model models.button, texture.all stone
+78: name "Snow", model models.snow, texture.all snow
+# ditto as for mob spawners (52)
+79: name "Ice", model models.tinted_glass, texture.all ice
+80: name "Snow Block", texture.all snow
+81: name "Cactus", model models.cactus, texture.y cactus_top, texture.sides cactus_side
+82: name "Clay", texture.all clay
+83: name "Sugar Cane", model models.plant, texture.all unknown
+84: name "Jukebox", texture.all jukebox_side, texture.top jukebox_top
