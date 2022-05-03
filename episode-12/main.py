@@ -33,10 +33,10 @@ class Window(pyglet.window.Window):
 
 		self.WIDTH = self.width
 		self.HEIGHT = self.height
+		
 		# create world
 
 		self.world = world.World()
-		self.block_type = block_type.Block_type(texture_manager.Texture_manager(16, 16, 256))
 		
 		# create shader
 
@@ -101,7 +101,7 @@ class Window(pyglet.window.Window):
 			self.player.input = [0, 0, 0]
 
 		self.player.update(delta_time)
-		self.selected.update(int(self.selectedX))
+		self.selected.updateSelect(int(self.selectedX))
 		self.HEIGHT, self.WIDTH = self.get_size()
 	
 	def on_draw(self):
@@ -124,14 +124,6 @@ class Window(pyglet.window.Window):
 
 		for image in self.image_list:
 			image.draw()
-		
-		# trying to make all textures change to random textures, making it induce a seizure on the user
-		'''for face in self.block_type.block_face_textures:
-			texture = self.block_type.block_face_textures[face]
-			texture_manager.Texture_manager.add_texture(texture)
-
-			texture_index = texture_manager.Texture_manager.textures.index(texture)
-			print(texture_index)'''
 
 		gl.glFinish()
 

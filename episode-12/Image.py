@@ -17,7 +17,7 @@ class Image:
         gl.glFramebufferTexture2D(gl.GL_READ_FRAMEBUFFER, gl.GL_COLOR_ATTACHMENT0, gl.GL_TEXTURE_2D, self.texture.id, 0)
         gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, 0)
     
-    def update(self, x):
+    def updateSelect(self, x):
         self.x = x
 
     def draw(self):
