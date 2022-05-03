@@ -118,7 +118,7 @@ class Entity:
 						# if not a num continue, basically airblock since it has None
 						# water is 9
 						if num == 9:
-							if pos[1] < self.position[1] - 0.35:
+							if pos[1] < self.position[1] - 0.5:
 								continue
 							player.inWater = True
 							GRAVITY_ACCEL = (0, -3, 0)

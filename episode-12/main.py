@@ -3,6 +3,7 @@ import math
 import ctypes
 import os
 import random
+from turtle import width
 import pyglet
 from Image import Image
 
@@ -26,13 +27,12 @@ import hit
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
-WIDTH = 1920
-HEIGHT = 1080
-
 class Window(pyglet.window.Window):
 	def __init__(self, **args):
 		super().__init__(**args)
 
+		self.WIDTH = self.width
+		self.HEIGHT = self.height
 		# create world
 
 		self.world = world.World()
@@ -63,13 +63,13 @@ class Window(pyglet.window.Window):
 
 		self.slots = {"1": None, "2": None, "3": None, "4": None, "5": None, "6": None, "7": None, "8": None, "9": None}
 		self.activeSlot = self.slots.get("1")
-		self.selectedX = (WIDTH / 2 - 260)
+		self.selectedX = (self.WIDTH / 3 + 125)
 
 		# 2d on-screen images
 
 		self.image_list = []
 
-		self.crosshair_image = Image(f"textures/crosshair.png", (WIDTH / 2 -51), (HEIGHT / 2 - 10), 1)
+		self.crosshair_image = Image(f"textures/crosshair.png", (self.WIDTH / 2), (self.HEIGHT / 2), 1)
 		self.selected  = Image(f"textures/selection.png", self.selectedX, y=0, scale=1)
 
 		self.image_list.append(self.crosshair_image)
@@ -82,7 +82,7 @@ class Window(pyglet.window.Window):
 		self.offset = 0
 		self.image_list.append(self.selected)
 		self.iteration = 0
-		for block in range(9):
+		for x in range(9):
 			num = random.randint(1, len(self.world.block_types) - 1)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
 			self.block_image = Image(f"textures/{self.png}.png", (self.selected.x + 16) + self.offset, self.selected.y + 15, self.block_scale)
@@ -102,6 +102,7 @@ class Window(pyglet.window.Window):
 
 		self.player.update(delta_time)
 		self.selected.update(int(self.selectedX))
+		self.HEIGHT, self.WIDTH = self.get_size()
 	
 	def on_draw(self):
 		self.clear()
@@ -254,47 +255,47 @@ class Window(pyglet.window.Window):
 			self.activeSlot = self.slots.get("1")
 			self.activeSlotNum = 0
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260)
+			self.selectedX = self.image_list[1].x
 		elif key == 50:
 			self.activeSlot = self.slots.get("2")
 			self.activeSlotNum = 1
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 44
+			self.selectedX = self.image_list[1].x + 44
 		elif key == 51:
 			self.activeSlot = self.slots.get("3")
 			self.activeSlotNum = 2
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 88
+			self.selectedX = self.image_list[1].x + 88
 		elif key == 52:
 			self.activeSlot = self.slots.get("4")
 			self.activeSlotNum = 3
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 132
+			self.selectedX = self.image_list[1].x + 132
 		elif key == 53:
 			self.activeSlot = self.slots.get("5")
 			self.activeSlotNum = 4
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 176
+			self.selectedX = self.image_list[1].x + 176
 		elif key == 54:
 			self.activeSlot = self.slots.get("6")
 			self.activeSlotNum = 5
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 220
+			self.selectedX = self.image_list[1].x + 220
 		elif key == 55:
 			self.activeSlot = self.slots.get("7")
 			self.activeSlotNum = 6
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 264
+			self.selectedX = self.image_list[1].x + 264
 		elif key == 56:
 			self.activeSlot = self.slots.get("8")
 			self.activeSlotNum = 7
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 308
+			self.selectedX = self.image_list[1].x + 308
 		elif key == 57:
 			self.activeSlot = self.slots.get("9")
 			self.activeSlotNum = 8
 			self.holding = self.activeSlot
-			self.selectedX = (WIDTH / 2 - 260) + 352
+			self.selectedX = self.image_list[1].x + 352
 	
 	def on_key_release(self, key, modifiers):
 		if not self.mouse_captured:
@@ -315,7 +316,7 @@ class Window(pyglet.window.Window):
 class Game:
 	def __init__(self):
 		self.config = gl.Config(major_version = 3, minor_version = 3, depth_size = 16)
-		self.window = Window(config = self.config, width = WIDTH, height = HEIGHT, caption = "Minecraf", resizable = True, vsync = False)
+		self.window = Window(config = self.config, width = 1920, height = 1080, caption = "Minecraf", resizable = True, vsync = False)
 	
 	def run(self):
 		pyglet.app.run()
