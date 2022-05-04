@@ -33,7 +33,7 @@ class Window(pyglet.window.Window):
 
 		self.WIDTH = self.width
 		self.HEIGHT = self.height
-		
+
 		# create world
 
 		self.world = world.World()
@@ -57,7 +57,7 @@ class Window(pyglet.window.Window):
 		# misc stuff
 
 		self.holding = None
-		self.block_scale = 1.99
+		self.block_scale = 2
 		self.offset = 0
 		self.activeSlotNum = 0
 
@@ -69,7 +69,7 @@ class Window(pyglet.window.Window):
 
 		self.image_list = []
 
-		self.crosshair_image = Image(f"textures/crosshair.png", (self.WIDTH / 2), (self.HEIGHT / 2), 1)
+		self.crosshair_image = Image(f"textures/crosshair.png", (self.WIDTH)/2, (self.HEIGHT)/2, scale=1)
 		self.selected  = Image(f"textures/selection.png", self.selectedX, y=0, scale=1)
 
 		self.image_list.append(self.crosshair_image)
@@ -85,7 +85,9 @@ class Window(pyglet.window.Window):
 		for x in range(9):
 			num = random.randint(1, len(self.world.block_types) - 1)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
-			self.block_image = Image(f"textures/{self.png}.png", (self.selected.x + 16) + self.offset, self.selected.y + 15, self.block_scale)
+			self.block_image = Image(f"textures/{self.png}.png", self.image_list[self.iteration+1].x + 6, self.image_list[self.iteration+1].y + 5, self.block_scale)
+			self.block_image.width = 20
+			self.block_image.height = 20
 			self.image_list.append(self.block_image)
 			self.offset += 44
 			if self.iteration == 0:
@@ -99,10 +101,11 @@ class Window(pyglet.window.Window):
 
 		if not self.mouse_captured:
 			self.player.input = [0, 0, 0]
-
+			
+		self.WIDTH, self.HEIGHT = self.get_size()
 		self.player.update(delta_time)
+		self.crosshair_image.updateCross(x=int(self.WIDTH/2), y=int(self.HEIGHT/2))
 		self.selected.updateSelect(int(self.selectedX))
-		self.HEIGHT, self.WIDTH = self.get_size()
 	
 	def on_draw(self):
 		self.clear()
@@ -150,11 +153,17 @@ class Window(pyglet.window.Window):
 			elif button == pyglet.window.mouse.LEFT: 
 				self.world.set_block(next_block, 0)
 			elif button == pyglet.window.mouse.MIDDLE:
-				self.image_list.pop(-1)
-				self.holding = self.world.get_block_number(next_block)
-				self.png = self.world.block_types[self.holding].block_face_textures.get("all")
-				self.block_image = Image(f"textures/{self.png}.png", self.selected.x + 16, self.selected.y + 15, self.block_scale)
-				self.image_list.append(self.block_image)
+				num = self.world.get_block_number(next_block)
+				keys = list(self.slots.keys())
+				self.slots[keys[self.activeSlotNum]] = num
+				self.holding = num
+				index = 11 + self.activeSlotNum
+				self.image_list.pop(index)
+				self.png = self.world.block_types[num].block_face_textures.get("all")
+				self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 6, self.selected.y + 5, self.block_scale)
+				self.block_image.width = 20
+				self.block_image.height = 20
+				self.image_list.insert(index, self.block_image)
 
 		x, y, z = self.player.position
 		y += self.player.eyelevel
@@ -218,7 +227,9 @@ class Window(pyglet.window.Window):
 			index = 11 + self.activeSlotNum
 			self.image_list.pop(index)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
-			self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 16, self.selected.y + 15, self.block_scale)
+			self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 6, self.selected.y + 5, self.block_scale)
+			self.block_image.width = 20
+			self.block_image.height = 20
 			self.image_list.insert(index, self.block_image)
 
 		elif key == pyglet.window.key.O:
@@ -252,42 +263,42 @@ class Window(pyglet.window.Window):
 			self.activeSlot = self.slots.get("2")
 			self.activeSlotNum = 1
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 44
+			self.selectedX = self.image_list[2].x
 		elif key == 51:
 			self.activeSlot = self.slots.get("3")
 			self.activeSlotNum = 2
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 88
+			self.selectedX = self.image_list[3].x
 		elif key == 52:
 			self.activeSlot = self.slots.get("4")
 			self.activeSlotNum = 3
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 132
+			self.selectedX = self.image_list[4].x
 		elif key == 53:
 			self.activeSlot = self.slots.get("5")
 			self.activeSlotNum = 4
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 176
+			self.selectedX = self.image_list[5].x
 		elif key == 54:
 			self.activeSlot = self.slots.get("6")
 			self.activeSlotNum = 5
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 220
+			self.selectedX = self.image_list[6].x
 		elif key == 55:
 			self.activeSlot = self.slots.get("7")
 			self.activeSlotNum = 6
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 264
+			self.selectedX = self.image_list[7].x
 		elif key == 56:
 			self.activeSlot = self.slots.get("8")
 			self.activeSlotNum = 7
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 308
+			self.selectedX = self.image_list[8].x
 		elif key == 57:
 			self.activeSlot = self.slots.get("9")
 			self.activeSlotNum = 8
 			self.holding = self.activeSlot
-			self.selectedX = self.image_list[1].x + 352
+			self.selectedX = self.image_list[9].x
 	
 	def on_key_release(self, key, modifiers):
 		if not self.mouse_captured:

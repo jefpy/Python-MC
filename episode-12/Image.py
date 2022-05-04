@@ -11,6 +11,8 @@ class Image:
         self.scale = math.floor(float(scale))
         self.x = math.floor(float(x))
         self.y = math.floor(float(y))
+        self.width = self.texture.width
+        self.height = self.texture.height
         self.read_fbo_id = gl.GLuint(0)
         gl.glGenFramebuffers(1, byref(self.read_fbo_id))
         gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, self.read_fbo_id)
@@ -19,10 +21,14 @@ class Image:
     
     def updateSelect(self, x):
         self.x = x
+    
+    def updateCross(self, x, y):
+        self.x = math.floor(x)
+        self.y = math.floor(y)
 
     def draw(self):
         gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, self.read_fbo_id)
-        gl.glBlitFramebuffer(0, 0, self.texture.width, self.texture.height, self.x, self.y * self.scale,
-                             self.x + (self.texture.width * self.scale), self.y + (self.texture.height * self.scale), gl.GL_COLOR_BUFFER_BIT,
+        gl.glBlitFramebuffer(0, 0, self.width, self.height, self.x, self.y * self.scale,
+                             self.x + (self.width * self.scale), self.y + (self.height * self.scale), gl.GL_COLOR_BUFFER_BIT,
                              gl.GL_NEAREST)
         gl.glBindFramebuffer(gl.GL_READ_FRAMEBUFFER, 0)
