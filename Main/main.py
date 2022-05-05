@@ -63,7 +63,7 @@ class Window(pyglet.window.Window):
 
 		self.slots = {"1": None, "2": None, "3": None, "4": None, "5": None, "6": None, "7": None, "8": None, "9": None}
 		self.activeSlot = self.slots.get("1")
-		self.selectedX = (self.WIDTH / 2.55)
+		self.selectedX = 0
 
 		# 2d on-screen images
 
@@ -106,7 +106,7 @@ class Window(pyglet.window.Window):
 		self.player.update(delta_time)
 		self.crosshair_image.updateCross(x=int(self.WIDTH/2), y=int(self.HEIGHT/2))
 		self.selected.updateSelect(int(self.image_list[self.activeSlotNum+1].x))
-		self.selectedX = int(self.WIDTH / 2 - 210)
+		self.selectedX = int(self.WIDTH / 2 - 208)
 		
 		offset = 0
 		for x in range(1, 10, 1):
