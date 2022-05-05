@@ -63,7 +63,7 @@ class Window(pyglet.window.Window):
 
 		self.slots = {"1": None, "2": None, "3": None, "4": None, "5": None, "6": None, "7": None, "8": None, "9": None}
 		self.activeSlot = self.slots.get("1")
-		self.selectedX = (self.WIDTH / 3 + 125)
+		self.selectedX = (self.WIDTH / 2.55)
 
 		# 2d on-screen images
 
@@ -85,8 +85,8 @@ class Window(pyglet.window.Window):
 		for x in range(9):
 			num = random.randint(1, len(self.world.block_types) - 1)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
-			self.block_image = Image(f"textures/{self.png}.png", self.image_list[self.iteration+1].x + 6, self.image_list[self.iteration+1].y + 5, self.block_scale)
-			self.block_image.width = 20
+			self.block_image = Image(f"textures/{self.png}.png", self.image_list[self.iteration+1].x + 3, self.image_list[self.iteration+1].y + 3, self.block_scale)
+			self.block_image.width = 15
 			self.block_image.height = 20
 			self.image_list.append(self.block_image)
 			self.offset += 44
@@ -105,7 +105,18 @@ class Window(pyglet.window.Window):
 		self.WIDTH, self.HEIGHT = self.get_size()
 		self.player.update(delta_time)
 		self.crosshair_image.updateCross(x=int(self.WIDTH/2), y=int(self.HEIGHT/2))
-		self.selected.updateSelect(int(self.selectedX))
+		self.selected.updateSelect(int(self.image_list[self.activeSlotNum+1].x))
+		self.selectedX = int(self.WIDTH / 2 - 210)
+		
+		offset = 0
+		for x in range(1, 10, 1):
+			self.image_list[x].updateSelect(self.selectedX + offset)
+			offset += 44
+
+		offset = 0
+		for x in range(11, 20, 1):
+			self.image_list[x].updateSelect(self.selectedX + offset + 7)
+			offset += 44
 	
 	def on_draw(self):
 		self.clear()
@@ -160,7 +171,7 @@ class Window(pyglet.window.Window):
 				index = 11 + self.activeSlotNum
 				self.image_list.pop(index)
 				self.png = self.world.block_types[num].block_face_textures.get("all")
-				self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 6, self.selected.y + 5, self.block_scale)
+				self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 3, self.selected.y + 4, self.block_scale)
 				self.block_image.width = 20
 				self.block_image.height = 20
 				self.image_list.insert(index, self.block_image)
@@ -227,7 +238,7 @@ class Window(pyglet.window.Window):
 			index = 11 + self.activeSlotNum
 			self.image_list.pop(index)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
-			self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 6, self.selected.y + 5, self.block_scale)
+			self.block_image = Image(f"textures/{self.png}.png", self.image_list[self.activeSlotNum+1].x + 5, self.image_list[self.activeSlotNum+1].y + 4, self.block_scale)
 			self.block_image.width = 20
 			self.block_image.height = 20
 			self.image_list.insert(index, self.block_image)
