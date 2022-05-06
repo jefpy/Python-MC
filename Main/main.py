@@ -28,6 +28,7 @@ file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
 
 soundList = []
+p = pyglet.media.Player()
 
 with os.scandir(file_path) as listEntries:
 	for entry in listEntries:
@@ -37,11 +38,9 @@ with os.scandir(file_path) as listEntries:
 					for sound in sounds:
 						soundList.append(sound.name)
 
-num = random.randint(0, len(soundList)-1)
-snd = pyglet.media.load(f"sounds/{soundList[num]}")
-p = pyglet.media.Player()
-p.queue(snd)
-p.play()
+def fetchSong(num):
+	snd = pyglet.media.load(f"sounds/{soundList[num]}")
+	return snd
 
 class Window(pyglet.window.Window):
 	def __init__(self, **args):
@@ -114,6 +113,13 @@ class Window(pyglet.window.Window):
 
 	def update(self, delta_time): 
 		# print(f"FPS: {1.0 / delta_time}")
+		if p.playing == False:
+			num = random.randint(0, len(soundList)-1)
+			name = soundList[num]
+			snd = fetchSong(num)
+			p.queue(snd)
+			p.play()
+			print(f"{name[:-28]}\n")
 
 		if not self.mouse_captured:
 			self.player.input = [0, 0, 0]
@@ -347,6 +353,7 @@ class Game:
 	def __init__(self):
 		self.config = gl.Config(major_version = 3, minor_version = 3, depth_size = 16)
 		self.window = Window(config = self.config, width = 1920, height = 1080, caption = "Minecraf", resizable = True, vsync = False)
+		print("Playing:")
 	
 	def run(self):
 		pyglet.app.run()

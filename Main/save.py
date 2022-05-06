@@ -75,19 +75,20 @@ class Save:
 		chunk_data.save(chunk_path, gzipped = True)
 
 	def load(self):
-		# these 2 loops generate rest of world
-		'''
+		# these first 2 loops generate rest of world
+		print("Loading World ...")
 		for x in range(-16, 15):
 			for y in range(-15, 16):
 				self.load_chunk((x, 0, y))
 
 		for x in range(-4, 4):
 			for y in range(-4, 4):
-				self.load_chunk((x, 0, y))'''
+				self.load_chunk((x, 0, y))
 
 		for x in range(-1, 1):
 			for y in range(-1, 1):
 				self.load_chunk((x, 0, y))
+		print("Loaded! Please standby.")
 	
 	def save(self):
 		for chunk_position in self.world.chunks:
