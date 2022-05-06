@@ -1,4 +1,3 @@
-
 import math
 import ctypes
 import os
@@ -9,6 +8,7 @@ from Image import Image
 
 pyglet.options["shadow_window"] = False
 pyglet.options["debug_gl"] = False
+pyglet.options['audio'] = ('pulse', 'openal', 'silent')
 
 import pyglet.gl as gl
 
@@ -26,6 +26,22 @@ import hit
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
+
+soundList = []
+
+with os.scandir(file_path) as listEntries:
+	for entry in listEntries:
+		if entry.is_dir:
+			if entry.name == "sounds":
+				with os.scandir(entry) as sounds:
+					for sound in sounds:
+						soundList.append(sound.name)
+
+num = random.randint(0, len(soundList)-1)
+snd = pyglet.media.load(f"sounds/{soundList[num]}")
+p = pyglet.media.Player()
+p.queue(snd)
+p.play()
 
 class Window(pyglet.window.Window):
 	def __init__(self, **args):

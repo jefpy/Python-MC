@@ -3,7 +3,7 @@ import entity
 import matrix
 
 WALKING_SPEED = 4.317
-SPRINTING_SPEED = 7 # faster than in Minecraft, feels better
+SPRINTING_SPEED = 9 # faster than in Minecraft, feels better
 EYE_LEVEL = 0
 inWater = False
 
