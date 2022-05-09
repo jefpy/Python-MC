@@ -89,3 +89,4 @@
 82: name "Clay", texture.all clay
 83: name "Sugar Cane", model models.plant, texture.all sugar_cane
 84: name "Jukebox", texture.all jukebox, texture.top jukebox_top
+85: name "Allium", model models.plant, texture.all allium
