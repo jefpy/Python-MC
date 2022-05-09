@@ -5,6 +5,11 @@ import random
 from turtle import width
 import pyglet
 from Image import Image
+
+pyglet.options["shadow_window"] = False
+pyglet.options["debug_gl"] = False
+pyglet.options['audio'] = ('pulse', 'openal', 'silent')
+
 import pyglet.gl as gl
 import matrix
 import shader
@@ -14,10 +19,6 @@ import texture_manager
 import chunk
 import world
 import hit
-
-pyglet.options["shadow_window"] = False
-pyglet.options["debug_gl"] = False
-pyglet.options['audio'] = ('pulse', 'openal', 'silent')
 
 file_path = os.path.dirname(os.path.abspath(__file__))
 os.chdir(file_path)
