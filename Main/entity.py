@@ -162,8 +162,13 @@ class Entity:
 		self.position = [x + v * delta_time for x, v in zip(self.position, self.velocity)]
 
 		# apply gravity acceleration
-
-		gravity = FLYING_ACCEL if self.flying else GRAVITY_ACCEL
+		try:
+			if self.flying:
+				gravity = FLYING_ACCEL
+			else:
+				gravity = GRAVITY_ACCEL
+		except UnboundLocalError:
+			return
 		self.velocity = [v + a * delta_time for v, a in zip(self.velocity, gravity)]
 
 		# apply friction/drag

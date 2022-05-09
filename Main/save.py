@@ -76,7 +76,6 @@ class Save:
 
 	def load(self):
 		# these first 2 loops generate rest of world
-		print("Loading World ...")
 		for x in range(-16, 15):
 			for y in range(-15, 16):
 				self.load_chunk((x, 0, y))
@@ -88,7 +87,6 @@ class Save:
 		for x in range(-1, 1):
 			for y in range(-1, 1):
 				self.load_chunk((x, 0, y))
-		print("Loaded! Please standby.")
 	
 	def save(self):
 		for chunk_position in self.world.chunks:

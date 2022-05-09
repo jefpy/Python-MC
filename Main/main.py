@@ -8,7 +8,8 @@ from Image import Image
 
 pyglet.options["shadow_window"] = False
 pyglet.options["debug_gl"] = False
-pyglet.options['audio'] = ('pulse', 'openal', 'silent')
+pyglet.options['audio'] = ('pulse', 'directsound', 'openal', 'silent') # If you're using pulseaudio driver, make sure to kill it 
+print(pyglet.media.get_audio_driver())								   # with -k and restart it with --start for sound to work if you're experiencing problems.
 
 import pyglet.gl as gl
 import matrix
@@ -190,7 +191,7 @@ class Window(pyglet.window.Window):
 				self.image_list.pop(index)
 				self.png = self.world.block_types[num].block_face_textures.get("all")
 				self.block_image = Image(f"textures/{self.png}.png", self.selectedX + 3, self.selected.y + 4, self.block_scale)
-				self.block_image.width = 20
+				self.block_image.width = 15
 				self.block_image.height = 20
 				self.image_list.insert(index, self.block_image)
 
@@ -257,7 +258,7 @@ class Window(pyglet.window.Window):
 			self.image_list.pop(index)
 			self.png = self.world.block_types[num].block_face_textures.get("all")
 			self.block_image = Image(f"textures/{self.png}.png", self.image_list[self.activeSlotNum+1].x + 5, self.image_list[self.activeSlotNum+1].y + 4, self.block_scale)
-			self.block_image.width = 20
+			self.block_image.width = 15
 			self.block_image.height = 20
 			self.image_list.insert(index, self.block_image)
 
